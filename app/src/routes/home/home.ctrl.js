@@ -1,7 +1,7 @@
 // ES6 사용
 "use strict";
 
-const UserStorage = require("../../model/UserStorage");
+const User = require("../../model/User");
 
 const output = {
     // 컨트롤러 분리    
@@ -19,21 +19,8 @@ const output = {
 
 const process = {
     login : (req, res) => {
-        const id = req.body.id;
-        const pw = req.body.pw;
-
-        const users = UserStorage.getUsers("id", "passwd");
-        const response = {};
-        if (users.id.includes(id)) {
-            const idx = users.id.indexOf(id); 
-            if (users.passwd[idx] == pw) {
-                response.success = true;
-                return res.json(response);
-            }
-        }
-
-        response.success = false;
-        response.msg = "로그인에 실패하였습니다";
+        const user = new User(req.body);
+        const response = user.login();
         return res.json(response);
     }
 }

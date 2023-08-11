@@ -1,3 +1,6 @@
+// Node 서버의 기본설정
+ 
+
 // console.log("hello");
 
 // terminal - npm install figlet
